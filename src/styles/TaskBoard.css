@@ -1,0 +1,72 @@
+.task-board {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-color);
+    overflow: hidden;
+  }
+  
+  .board-header {
+    padding: 20px;
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  .board-header h1 {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+  
+  .add-task-form {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .task-input {
+    flex: 1;
+    padding: 10px 12px;
+    background-color: var(--panel-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    color: var(--text-color);
+    font-size: 14px;
+    transition: border-color 0.2s;
+  }
+  
+  .task-input:focus {
+    border-color: var(--highlight-color);
+  }
+  
+  .priority-select {
+    padding: 10px 12px;
+    background-color: var(--panel-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    color: var(--text-color);
+    font-size: 14px;
+    min-width: 100px;
+  }
+  
+  .add-button {
+    padding: 10px 16px;
+    background-color: var(--highlight-color);
+    color: white;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+  }
+  
+  .add-button:hover {
+    background-color: #0066b8;
+  }
+  
+  .board-columns {
+    display: flex;
+    flex: 1;
+    padding: 20px;
+    gap: 20px;
+    overflow-x: auto;
+    align-items: flex-start; /* Prevent columns from stretching */
+  }
+  
