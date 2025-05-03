@@ -10,7 +10,7 @@ const TaskColumn = ({ title, tasks, columnId, deleteTask }) => {
         <span className="task-count">{tasks.length}</span>
       </div>
 
-      <Droppable droppableId={columnId} isCombineEnabled={false}>
+      <Droppable droppableId={columnId} isCombineEnabled={false} isDropDisabled={false}>
         {(provided, snapshot) => (
           <div
             className={`task-list ${snapshot.isDraggingOver ? "dragging-over" : ""}`}
