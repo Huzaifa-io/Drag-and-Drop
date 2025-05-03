@@ -8,6 +8,7 @@ import Header from "./components/Header"
 import ProfilesPage from "./components/ProfilesPage"
 import "./App.css"
 
+
 function App() {
   const [currentPage, setCurrentPage] = useState("tasks") // "tasks" or "profiles"
   const [tasks, setTasks] = useState({
