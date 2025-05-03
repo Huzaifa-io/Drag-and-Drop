@@ -1,78 +1,71 @@
 .task-board {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    background-color: var(--bg-color);
-    overflow: hidden;
-  }
-  
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-color);
+  overflow: hidden;
+}
+
+.board-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.board-header h1 {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.add-task-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background-color: var(--highlight-color);
+  color: white;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.add-task-button:hover {
+  background-color: #e69008;
+}
+
+.board-columns {
+  display: flex;
+  flex: 1;
+  padding: 20px;
+  gap: 20px;
+  overflow-x: auto;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
   .board-header {
-    padding: 20px 24px;
-    border-bottom: 1px solid var(--border-color);
+    padding: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
   }
-  
-  .board-header h1 {
-    font-size: 18px;
-    font-weight: 500;
-    margin-bottom: 16px;
-  }
-  
-  .add-task-form {
-    display: flex;
-    gap: 8px;
-  }
-  
-  .task-input {
-    padding: 10px 12px;
-    background-color: var(--panel-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    color: var(--text-color);
+
+  .add-task-button {
     width: 100%;
-    font-size: 14px;
-    transition: border-color 0.2s;
+    justify-content: center;
   }
-  
-  .task-input:focus {
-    border-color: var(--highlight-color);
-    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
-  }
-  
-  .priority-select {
-    padding: 10px 12px;
-    background-color: var(--panel-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    color: var(--text-color);
-    font-size: 14px;
-    min-width: 100px;
-  }
-  
-  .add-button {
-    padding: 10px 16px;
-    background-color: var(--highlight-color);
-    color: white;
-    width: 120px;
-    border-radius: 6px;
-    font-size: 14px;
-    font-weight: 500;
-    transition: background-color 0.2s;
-  }
-  
-  .add-button:hover {
-    background-color: #2563eb;
-  }
+
   .board-columns {
-    display: flex;
-    flex-wrap: wrap; /* Allow columns to wrap to new line */
-    gap: 20px;
-    padding: 20px;
-    overflow-x: auto; /* Horizontal scroll if needed */
+    padding: 16px;
+    gap: 16px;
   }
-  
-  @media (min-width: 768px) {
-    .board-columns {
-      flex-wrap: nowrap; /* Force horizontal layout on larger screens */
-    }
+}
+
+@media (max-width: 576px) {
+  .board-header h1 {
+    font-size: 16px;
   }
-  
+}

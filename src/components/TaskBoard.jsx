@@ -2,52 +2,93 @@
 
 import { useState } from "react"
 import TaskColumn from "./TaskColumn"
+import TaskModal from "./TaskModal"
+import { Plus } from "lucide-react"
 import "../styles/TaskBoard.css"
 
-const TaskBoard = ({ tasks, addTask, deleteTask }) => {
-  const [newTaskContent, setNewTaskContent] = useState("")
-  const [newTaskPriority, setNewTaskPriority] = useState("medium")
+const TaskBoard = ({ tasks, addTask, deleteTask, editTask, categories }) => {
+  const [showTaskModal, setShowTaskModal] = useState(false)
+  const [taskToEdit, setTaskToEdit] = useState(null)
+  const [currentList, setCurrentList] = useState(null)
 
-  const handleAddTask = (e) => {
-    e.preventDefault()
-    if (newTaskContent.trim()) {
-      addTask(newTaskContent, newTaskPriority)
-      setNewTaskContent("")
+  const handleAddTask = (content, priority, categoryId) => {
+    addTask(content, priority, categoryId)
+    setShowTaskModal(false)
+  }
+
+  const handleEditTask = (content, priority, categoryId) => {
+    if (taskToEdit && currentList) {
+      editTask(taskToEdit.id, currentList, {
+        content,
+        priority,
+        category: categoryId,
+      })
+      setShowTaskModal(false)
+      setTaskToEdit(null)
+      setCurrentList(null)
     }
+  }
+
+  const openEditModal = (task, listId) => {
+    setTaskToEdit(task)
+    setCurrentList(listId)
+    setShowTaskModal(true)
   }
 
   return (
     <div className="task-board">
       <div className="board-header">
         <h1>Task Board</h1>
-        <form className="add-task-form" onSubmit={handleAddTask}>
-          <input
-            type="text"
-            value={newTaskContent}
-            onChange={(e) => setNewTaskContent(e.target.value)}
-            placeholder="Add a new task..."
-            className="task-input"
-          />
-          <select
-            value={newTaskPriority}
-            onChange={(e) => setNewTaskPriority(e.target.value)}
-            className="priority-select"
-          >
-            <option value="low">Low</option>
-            <option value="medium">Medium</option>
-            <option value="high">High</option>
-          </select>
-          <button type="submit" className="add-button">
-            Add Task
-          </button>
-        </form>
+        <button
+          className="add-task-button"
+          onClick={() => {
+            setTaskToEdit(null)
+            setShowTaskModal(true)
+          }}
+        >
+          <Plus size={16} />
+          <span>Add Task</span>
+        </button>
       </div>
 
       <div className="board-columns">
-        <TaskColumn title="To Do" tasks={tasks.todo} columnId="todo" deleteTask={deleteTask} />
-        <TaskColumn title="In Progress" tasks={tasks.inProgress} columnId="inProgress" deleteTask={deleteTask} />
-        <TaskColumn title="Completed" tasks={tasks.completed} columnId="completed" deleteTask={deleteTask} />
+        <TaskColumn
+          title="To Do"
+          tasks={tasks.todo}
+          columnId="todo"
+          deleteTask={deleteTask}
+          editTask={openEditModal}
+          categories={categories}
+        />
+        <TaskColumn
+          title="In Progress"
+          tasks={tasks.inProgress}
+          columnId="inProgress"
+          deleteTask={deleteTask}
+          editTask={openEditModal}
+          categories={categories}
+        />
+        <TaskColumn
+          title="Completed"
+          tasks={tasks.completed}
+          columnId="completed"
+          deleteTask={deleteTask}
+          editTask={openEditModal}
+          categories={categories}
+        />
       </div>
+
+      {showTaskModal && (
+        <TaskModal
+          onSave={taskToEdit ? handleEditTask : handleAddTask}
+          onClose={() => {
+            setShowTaskModal(false)
+            setTaskToEdit(null)
+          }}
+          initialData={taskToEdit}
+          categories={categories}
+        />
+      )}
     </div>
   )
 }

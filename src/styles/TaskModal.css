@@ -1,0 +1,62 @@
+.task-modal {
+    background-color: var(--panel-bg);
+    border-radius: 8px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+  }
+  
+  .task-modal form {
+    padding: 16px;
+  }
+  
+  .form-group textarea {
+    width: 100%;
+    padding: 10px 12px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: var(--text-color);
+    font-size: 14px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    resize: vertical;
+  }
+  
+  .form-group textarea:focus {
+    border-color: var(--highlight-color);
+    box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.2);
+  }
+  
+  .form-group select {
+    width: 100%;
+    padding: 10px 12px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: var(--text-color);
+    font-size: 14px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238a8fa3' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+  }
+  
+  .form-group select:focus {
+    border-color: var(--highlight-color);
+    box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.2);
+  }
+  
+  .form-group textarea.error,
+  .form-group select.error {
+    border-color: var(--danger-color);
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 576px) {
+    .task-modal {
+      width: 90%;
+    }
+  }
+  
