@@ -5,7 +5,6 @@ import {
   ChevronDown,
   ChevronRight,
   Home,
-  Calendar,
   CheckSquare,
   Users,
   Settings,
@@ -13,10 +12,12 @@ import {
   Code,
   Package,
   Database,
+  Shield,
+  User,
 } from "lucide-react"
 import "../styles/Sidebar.css"
 
-const Sidebar = () => {
+const Sidebar = ({ currentPage, setCurrentPage }) => {
   const [expandedItems, setExpandedItems] = useState({
     "Project Structure": true,
     Components: true,
@@ -59,22 +60,26 @@ const Sidebar = () => {
   ]
 
   const quickLinks = [
-    { title: "Dashboard", icon: <Home size={16} /> },
-    { title: "My Tasks", icon: <CheckSquare size={16} /> },
-    { title: "Calendar", icon: <Calendar size={16} /> },
-    { title: "Team", icon: <Users size={16} /> },
-    { title: "Settings", icon: <Settings size={16} /> },
+    { title: "Dashboard", icon: <Home size={16} />, id: "tasks" },
+    { title: "Profiles", icon: <Users size={16} />, id: "profiles" },
   ]
 
   return (
     <div className="sidebar">
       <div className="sidebar-header">
-        <span>Project Manager</span>
+        <div className="app-logo">
+          <Shield size={20} />
+          <span>Argus</span>
+        </div>
       </div>
 
       <div className="quick-links">
-        {quickLinks.map((item, index) => (
-          <div key={index} className="quick-link-item">
+        {quickLinks.map((item) => (
+          <div
+            key={item.id}
+            className={`quick-link-item ${currentPage === item.id ? "active" : ""}`}
+            onClick={() => setCurrentPage(item.id)}
+          >
             <span className="menu-icon">{item.icon}</span>
             <span className="menu-title">{item.title}</span>
           </div>
@@ -104,6 +109,18 @@ const Sidebar = () => {
             )}
           </div>
         ))}
+      </div>
+
+      <div className="sidebar-footer">
+        <div className="user-profile">
+          <div className="user-avatar">
+            <User size={18} />
+          </div>
+          <div className="user-info">
+            <div className="user-name">Alex Morgan</div>
+            <div className="user-role">Administrator</div>
+          </div>
+        </div>
       </div>
     </div>
   )

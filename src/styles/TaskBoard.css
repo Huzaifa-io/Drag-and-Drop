@@ -7,12 +7,12 @@
   }
   
   .board-header {
-    padding: 20px;
+    padding: 20px 24px;
     border-bottom: 1px solid var(--border-color);
   }
   
   .board-header h1 {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
     margin-bottom: 16px;
   }
@@ -27,7 +27,7 @@
     padding: 10px 12px;
     background-color: var(--panel-bg);
     border: 1px solid var(--border-color);
-    border-radius: 4px;
+    border-radius: 6px;
     color: var(--text-color);
     font-size: 14px;
     transition: border-color 0.2s;
@@ -35,13 +35,14 @@
   
   .task-input:focus {
     border-color: var(--highlight-color);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
   }
   
   .priority-select {
     padding: 10px 12px;
     background-color: var(--panel-bg);
     border: 1px solid var(--border-color);
-    border-radius: 4px;
+    border-radius: 6px;
     color: var(--text-color);
     font-size: 14px;
     min-width: 100px;
@@ -51,14 +52,14 @@
     padding: 10px 16px;
     background-color: var(--highlight-color);
     color: white;
-    border-radius: 4px;
+    border-radius: 6px;
     font-size: 14px;
     font-weight: 500;
     transition: background-color 0.2s;
   }
   
   .add-button:hover {
-    background-color: #0066b8;
+    background-color: #2563eb;
   }
   
   .board-columns {
@@ -67,6 +68,5 @@
     padding: 20px;
     gap: 20px;
     overflow-x: auto;
-    align-items: flex-start; /* Prevent columns from stretching */
   }
   

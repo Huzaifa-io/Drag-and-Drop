@@ -4,9 +4,12 @@ import { useState } from "react"
 import { DragDropContext } from "react-beautiful-dnd"
 import Sidebar from "./components/Sidebar"
 import TaskBoard from "./components/TaskBoard"
+import Header from "./components/Header"
+import ProfilesPage from "./components/ProfilesPage"
 import "./App.css"
 
 function App() {
+  const [currentPage, setCurrentPage] = useState("tasks") // "tasks" or "profiles"
   const [tasks, setTasks] = useState({
     todo: [
       { id: "task-1", content: "Create project documentation", priority: "high" },
@@ -25,7 +28,7 @@ function App() {
 
   // Handle drag end event with improved positioning
   const handleDragEnd = (result) => {
-    const { source, destination } = result
+    const { source, destination, draggableId } = result
 
     // If dropped outside a droppable area
     if (!destination) return
@@ -38,11 +41,20 @@ function App() {
     // Create a deep copy of the tasks to avoid mutation issues
     const tasksCopy = JSON.parse(JSON.stringify(tasks))
 
-    // Remove the dragged item from the source list
-    const [removed] = tasksCopy[source.droppableId].splice(source.index, 1)
+    // Find the task that was dragged
+    const sourceList = tasksCopy[source.droppableId]
+    const movedTask = sourceList.find((task) => task.id === draggableId)
 
-    // Insert the item at the new position
-    tasksCopy[destination.droppableId].splice(destination.index, 0, removed)
+    if (!movedTask) {
+      console.error(`Task with id ${draggableId} not found in ${source.droppableId}`)
+      return
+    }
+
+    // Remove the task from the source list
+    tasksCopy[source.droppableId] = sourceList.filter((task) => task.id !== draggableId)
+
+    // Add the task to the destination list
+    tasksCopy[destination.droppableId].splice(destination.index, 0, movedTask)
 
     // Update the state with the new task arrangement
     setTasks(tasksCopy)
@@ -74,10 +86,18 @@ function App() {
 
   return (
     <div className="app-container">
-      <Sidebar />
-      <DragDropContext onDragEnd={handleDragEnd}>
-        <TaskBoard tasks={tasks} addTask={addTask} deleteTask={deleteTask} />
-      </DragDropContext>
+      <Sidebar currentPage={currentPage} setCurrentPage={setCurrentPage} />
+      <div className="main-content">
+        <Header currentPage={currentPage} setCurrentPage={setCurrentPage} />
+        
+        {currentPage === "tasks" ? (
+          <DragDropContext onDragEnd={handleDragEnd}>
+            <TaskBoard tasks={tasks} addTask={addTask} deleteTask={deleteTask} />
+          </DragDropContext>
+        ) : currentPage === "profiles" ? (
+          <ProfilesPage />
+        ) : null}
+      </div>
     </div>
   )
 }

@@ -1,6 +1,6 @@
 .task-item {
     background-color: var(--card-bg);
-    border-radius: 4px;
+    border-radius: 6px;
     margin-bottom: 10px;
     padding: 12px;
     display: flex;
@@ -9,7 +9,8 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: transform 0.15s, box-shadow 0.15s, background-color 0.15s;
     position: relative;
-    width: 100%; /* Ensure consistent width */
+    width: 100%;
+    border: 1px solid var(--border-color);
   }
   
   .task-item:hover {
@@ -20,7 +21,8 @@
     transform: scale(1.02);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     background-color: var(--highlight-bg);
-    z-index: 10; /* Ensure dragged item appears above others */
+    z-index: 10;
+    border-color: var(--highlight-color);
   }
   
   .task-drag-handle {
@@ -35,7 +37,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    min-width: 0; /* Allow text to truncate */
+    min-width: 0;
   }
   
   .task-priority-indicator {
@@ -43,7 +45,7 @@
     height: 100%;
     min-height: 24px;
     border-radius: 2px;
-    flex-shrink: 0; /* Prevent indicator from shrinking */
+    flex-shrink: 0;
   }
   
   .priority-high .task-priority-indicator {
@@ -61,7 +63,7 @@
   .task-content p {
     margin: 0;
     word-break: break-word;
-    white-space: normal; /* Allow text to wrap */
+    white-space: normal;
     overflow: hidden;
     text-overflow: ellipsis;
   }
@@ -72,7 +74,7 @@
     transition: opacity 0.2s, color 0.2s;
     display: flex;
     align-items: center;
-    flex-shrink: 0; /* Prevent button from shrinking */
+    flex-shrink: 0;
   }
   
   .task-item:hover .task-delete-btn {
