@@ -52,6 +52,7 @@
     padding: 10px 16px;
     background-color: var(--highlight-color);
     color: white;
+    width: 120px;
     border-radius: 6px;
     font-size: 14px;
     font-weight: 500;
