@@ -61,11 +61,8 @@ const Sidebar = ({ currentPage, setCurrentPage, isOpen, setIsOpen }) => {
   ]
 
   const quickLinks = [
-    { title: "Dashboard", icon: <Home size={16} />, id: "dashboard" },
-    { title: "Tasks", icon: <CheckSquare size={16} />, id: "tasks" },
+    { title: "Dashboard", icon: <Home size={16} />, id: "tasks" },
     { title: "Profiles", icon: <Users size={16} />, id: "profiles" },
-    { title: "Security", icon: <Shield size={16} />, id: "security" },
-    { title: "Settings", icon: <Settings size={16} />, id: "settings" },
   ]
 
   return (
