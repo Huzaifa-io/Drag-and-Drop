@@ -26,6 +26,9 @@ function App() {
     ],
   })
 
+  // Add a state for controlling sidebar visibility on mobile
+  const [sidebarOpen, setSidebarOpen] = useState(true)
+
   // Handle drag end event with improved positioning
   const handleDragEnd = (result) => {
     const { source, destination, draggableId } = result
@@ -84,12 +87,19 @@ function App() {
     })
   }
 
+  // Update the return statement to include the sidebarOpen state
   return (
     <div className="app-container">
-      <Sidebar currentPage={currentPage} setCurrentPage={setCurrentPage} />
+      <Sidebar
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        isOpen={sidebarOpen}
+        setIsOpen={setSidebarOpen}
+      />
       <div className="main-content">
-        <Header currentPage={currentPage} setCurrentPage={setCurrentPage} />
-        
+        <Header setCurrentPage={setCurrentPage}
+          currentPage={currentPage} toggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
+
         {currentPage === "tasks" ? (
           <DragDropContext onDragEnd={handleDragEnd}>
             <TaskBoard tasks={tasks} addTask={addTask} deleteTask={deleteTask} />

@@ -1,16 +1,30 @@
 .sidebar {
-    width: 250px;
+    width: var(--sidebar-width);
     background-color: var(--sidebar-bg);
     border-right: 1px solid var(--border-color);
     display: flex;
     flex-direction: column;
     overflow-y: auto;
     height: 100%;
+    transition: transform 0.3s ease;
+    z-index: 100;
   }
   
   .sidebar-header {
     padding: 16px;
     border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .close-sidebar {
+    display: none;
+    color: var(--text-muted);
+  }
+  
+  .close-sidebar:hover {
+    color: var(--text-color);
   }
   
   .app-logo {
@@ -58,6 +72,7 @@
   .sidebar-content {
     flex: 1;
     padding-bottom: 16px;
+    overflow-y: auto;
   }
   
   .menu-item {
@@ -146,5 +161,25 @@
   .user-role {
     font-size: 12px;
     color: var(--text-muted);
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      transform: translateX(-100%);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+  
+    .sidebar.open {
+      transform: translateX(0);
+    }
+  
+    .close-sidebar {
+      display: block;
+    }
   }
   

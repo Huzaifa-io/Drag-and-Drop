@@ -19,16 +19,16 @@
   
   .add-task-form {
     display: flex;
-    gap: 10px;
+    gap: 8px;
   }
   
   .task-input {
-    flex: 1;
     padding: 10px 12px;
     background-color: var(--panel-bg);
     border: 1px solid var(--border-color);
     border-radius: 6px;
     color: var(--text-color);
+    width: 100%;
     font-size: 14px;
     transition: border-color 0.2s;
   }
@@ -61,12 +61,17 @@
   .add-button:hover {
     background-color: #2563eb;
   }
-  
   .board-columns {
     display: flex;
-    flex: 1;
-    padding: 20px;
+    flex-wrap: wrap; /* Allow columns to wrap to new line */
     gap: 20px;
-    overflow-x: auto;
+    padding: 20px;
+    overflow-x: auto; /* Horizontal scroll if needed */
+  }
+  
+  @media (min-width: 768px) {
+    .board-columns {
+      flex-wrap: nowrap; /* Force horizontal layout on larger screens */
+    }
   }
   

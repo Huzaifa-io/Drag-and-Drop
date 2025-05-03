@@ -1,7 +1,7 @@
-import { Search, Bell, Settings, User } from 'lucide-react'
+import { Search, Bell, Settings, User, Menu } from 'lucide-react'
 import "../styles/Header.css"
 
-const Header = ({ currentPage, setCurrentPage }) => {
+const Header = ({ currentPage, setCurrentPage, toggleSidebar }) => {
     const getPageTitle = () => {
         switch (currentPage) {
             case "tasks":
@@ -15,6 +15,9 @@ const Header = ({ currentPage, setCurrentPage }) => {
 
     return (
         <header className="app-header">
+            <button className="sidebar-toggle" onClick={toggleSidebar}>
+                <Menu size={20} />
+            </button>
             <div className="header-title">
                 <h1>{getPageTitle()}</h1>
             </div>

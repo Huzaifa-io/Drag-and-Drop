@@ -14,10 +14,11 @@ import {
   Database,
   Shield,
   User,
+  X,
 } from "lucide-react"
 import "../styles/Sidebar.css"
 
-const Sidebar = ({ currentPage, setCurrentPage }) => {
+const Sidebar = ({ currentPage, setCurrentPage, isOpen, setIsOpen }) => {
   const [expandedItems, setExpandedItems] = useState({
     "Project Structure": true,
     Components: true,
@@ -60,17 +61,23 @@ const Sidebar = ({ currentPage, setCurrentPage }) => {
   ]
 
   const quickLinks = [
-    { title: "Dashboard", icon: <Home size={16} />, id: "tasks" },
+    { title: "Dashboard", icon: <Home size={16} />, id: "dashboard" },
+    { title: "Tasks", icon: <CheckSquare size={16} />, id: "tasks" },
     { title: "Profiles", icon: <Users size={16} />, id: "profiles" },
+    { title: "Security", icon: <Shield size={16} />, id: "security" },
+    { title: "Settings", icon: <Settings size={16} />, id: "settings" },
   ]
 
   return (
-    <div className="sidebar">
+    <div className={`sidebar ${isOpen ? "open" : "closed"}`}>
       <div className="sidebar-header">
         <div className="app-logo">
           <Shield size={20} />
           <span>Argus</span>
         </div>
+        <button className="close-sidebar" onClick={() => setIsOpen(false)}>
+          <X size={18} />
+        </button>
       </div>
 
       <div className="quick-links">
@@ -78,7 +85,12 @@ const Sidebar = ({ currentPage, setCurrentPage }) => {
           <div
             key={item.id}
             className={`quick-link-item ${currentPage === item.id ? "active" : ""}`}
-            onClick={() => setCurrentPage(item.id)}
+            onClick={() => {
+              setCurrentPage(item.id)
+              if (window.innerWidth < 768) {
+                setIsOpen(false)
+              }
+            }}
           >
             <span className="menu-icon">{item.icon}</span>
             <span className="menu-title">{item.title}</span>
